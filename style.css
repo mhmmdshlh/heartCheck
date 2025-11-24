@@ -462,6 +462,7 @@ svg {
     -webkit-appearance: none;
     ;
     appearance: none;
+    display: block;
 }
 
 .rating-container input[type="range"]::-webkit-slider-thumb {
@@ -475,6 +476,10 @@ svg {
     box-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
 }
 
+.rating-container input[type=range]:active::-webkit-slider-thumb {
+    transform: scale(1.2);
+}
+
 .rating-container input[type="range"]::-moz-range-thumb {
     width: 20px;
     height: 20px;
@@ -485,26 +490,46 @@ svg {
     border: none;
 }
 
+.rating-container input[type=range]:active::-moz-range-thumb {
+    transform: scale(1.2);
+}
+
 .rating-labels {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
+    font-size: 1.1rem;
+    width: 100%;
 }
 
 .rating-labels span {
-    text-align: center;
+    width: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    white-space: nowrap;
     font-size: 0.9rem;
     color: var(--text-muted);
 }
 
+.rating-labels span:nth-child(1) {
+    margin-left: 10px;
+}
+
+.rating-labels span:nth-child(5) {
+    margin-right: 10px;
+}
+
 .rating-labels small {
+    margin-top: 4px;
     font-size: 0.75rem;
     color: var(--text-muted);
 }
 
 .rating-value {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 25px;
     font-weight: 600;
     color: var(--primary);
     font-size: 1.1rem;
@@ -513,8 +538,7 @@ svg {
 /* Radio Buttons */
 .radio-group {
     display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .radio-label {
@@ -536,8 +560,6 @@ svg {
 .radio-label input[type="radio"] {
     margin-right: 8px;
     cursor: pointer;
-    width: 18px;
-    height: 18px;
     accent-color: var(--primary);
 }
 
@@ -563,7 +585,7 @@ svg {
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s;
-    box-shadow: 0 5px 20px rgba(34, 211, 238, 0.3);
+    box-shadow: 0 5px 30px rgba(34, 211, 238, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -572,11 +594,7 @@ svg {
 
 .btn-submit:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(34, 211, 238, 0.5);
-}
-
-.btn-submit svg {
-    fill: currentColor;
+    box-shadow: 0 0px 30px rgba(34, 211, 238, 0.4);
 }
 
 /* Result Section */
@@ -777,10 +795,6 @@ svg {
 
     .form-row {
         grid-template-columns: 1fr;
-    }
-
-    .radio-group {
-        flex-direction: column;
     }
 
     .radio-label {

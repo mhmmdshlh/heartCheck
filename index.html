@@ -62,7 +62,7 @@
                         <div class="form-group">
                             <label for="ageCategory">Kategori Usia *</label>
                             <select id="ageCategory" name="ageCategory" required>
-                                <option value="">Pilih Kategori Usia</option>
+                                <option value="" disabled hidden selected>Pilih Kategori Usia</option>
                                 <option value="18-24">18-24 tahun</option>
                                 <option value="25-29">25-29 tahun</option>
                                 <option value="30-34">30-34 tahun</option>
@@ -82,7 +82,7 @@
                         <div class="form-group">
                             <label for="sex">Jenis Kelamin *</label>
                             <select id="sex" name="sex" required>
-                                <option value="">Pilih Jenis Kelamin</option>
+                                <option value="" disabled hidden selected>Pilih Jenis Kelamin</option>
                                 <option value="Male">Laki-laki</option>
                                 <option value="Female">Perempuan</option>
                             </select>
@@ -137,7 +137,7 @@
                     <div class="form-group">
                         <label for="diabetic">Status Diabetes *</label>
                         <select id="diabetic" name="diabetic" required>
-                            <option value="">Pilih Status Diabetes</option>
+                            <option value="" disabled hidden selected>Pilih Status Diabetes</option>
                             <option value="No">Tidak</option>
                             <option value="Yes">Ya</option>
                             <option value="No, borderline diabetes">Tidak, tapi pradiabetes</option>
@@ -281,7 +281,6 @@
 
             <!-- Hasil Prediksi (akan ditampilkan setelah submit) -->
             <div id="resultSection" class="result-section hidden">
-                <h3>Hasil Prediksi</h3>
                 <div id="resultContent"></div>
             </div>
         </div>
