@@ -59,6 +59,7 @@ genHealthSlider.addEventListener('input', function () {
 const predictionForm = document.getElementById('predictionForm');
 const resultSection = document.getElementById('resultSection');
 const resultContent = document.getElementById('resultContent');
+const errorContent = document.getElementById('errorContent');
 
 predictionForm.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -79,14 +80,7 @@ predictionForm.addEventListener('submit', function (e) {
         DiffWalking: document.querySelector('input[name="diffWalking"]:checked').value
     };
 
-    resultSection.classList.remove('hidden');
-    resultContent.innerHTML = `
-        <div style="text-align: center; padding: 40px;">
-            <div class="loading-spinner"></div>
-            <p style="color: var(--text-muted); margin-top: 20px;">Menganalisis data kesehatan Anda...</p>
-        </div>
-    `;
-
+    showLoading();
     resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
     fetch('https://mshlh.pythonanywhere.com/predict', {
@@ -103,78 +97,58 @@ predictionForm.addEventListener('submit', function (e) {
             }
         })
         .catch(error => {
-            console.error('Error:', error);
             displayError('Gagal terhubung ke server. Pastikan server backend sudah berjalan.');
         });
 });
 
+function showLoading() {
+    resultSection.classList.remove('hidden');
+    resultContent.classList.add('hidden');
+    errorContent.classList.add('hidden');
+    document.querySelector('.loading-state').style.display = 'block';
+}
+
 function displayPredictionResult(data) {
-    const riskPercentage = data.risk_probability;
-    const riskLevel = data.risk_level;
-    const riskColor = data.risk_color;
-    const recommendations = data.recommendation;
+    document.querySelector('.loading-state').style.display = 'none';
+    resultContent.classList.remove('hidden');
+    errorContent.classList.add('hidden');
 
-    resultContent.innerHTML = `
-        <div class="result-card">
-            <div class="result-header">
-                <h3>Hasil Prediksi Risiko Penyakit Jantung</h3>
-            </div>
-            
-            <div class="risk-meter">
-                <div class="risk-circle" style="border-color: ${riskColor};">
-                    <div class="risk-percentage" style="color: ${riskColor};">
-                        ${riskPercentage}%
-                    </div>
-                    <div class="risk-label" style="color: ${riskColor};">
-                        ${riskLevel}
-                    </div>
-                </div>
-            </div>
+    const riskCircle = document.getElementById('riskCircle');
+    const riskPercentageEl = document.getElementById('riskPercentage');
+    const riskLabelEl = document.getElementById('riskLabel');
+    const riskBarFill = document.getElementById('riskBarFill');
+    const recommendationList = document.getElementById('recommendationList');
 
-            <div class="risk-bar-container">
-                <div class="risk-bar">
-                    <div class="risk-bar-fill" style="width: ${riskPercentage}%; background: ${riskColor};"></div>
-                </div>
-                <div class="risk-bar-labels">
-                    <span>0%</span>
-                    <span>25%</span>
-                    <span>50%</span>
-                    <span>75%</span>
-                    <span>100%</span>
-                </div>
-            </div>
+    riskCircle.style.borderColor = data.risk_color;
+    riskPercentageEl.style.color = data.risk_color;
+    riskPercentageEl.textContent = data.risk_probability + '%';
+    riskLabelEl.style.color = data.risk_color;
+    riskLabelEl.textContent = data.risk_level;
 
-            <div class="recommendations">
-                <h4>Rekomendasi Kesehatan:</h4>
-                <ul class="recommendation-list">
-                    ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
-                </ul>
-            </div>
+    riskBarFill.style.width = data.risk_probability + '%';
+    riskBarFill.style.background = data.risk_color;
 
-            <div class="result-disclaimer">
-                <p><strong>Disclaimer:</strong> Hasil ini adalah prediksi berbasis AI dan tidak menggantikan diagnosis medis profesional. 
-                Selalu konsultasikan dengan dokter untuk evaluasi kesehatan yang akurat.</p>
-            </div>
-
-            <button onclick="resetForm()" class="btn-reset">Cek Ulang</button>
-        </div>
-    `;
+    recommendationList.innerHTML = '';
+    data.recommendation.forEach(rec => {
+        const li = document.createElement('li');
+        li.textContent = rec;
+        recommendationList.appendChild(li);
+    });
 }
 
 function displayError(errorMessage) {
-    resultContent.innerHTML = `
-        <div class="error-card">
-            <div style="font-size: 3rem; margin-bottom: 10px;">❌</div>
-            <h3 style="color: #ef4444; margin-bottom: 10px;">Terjadi Kesalahan</h3>
-            <p style="color: var(--text-muted);">${errorMessage}</p>
-            <button onclick="resetForm()" class="btn-reset" style="margin-top: 20px;">Coba Lagi</button>
-        </div>
-    `;
+    document.querySelector('.loading-state').style.display = 'none';
+    resultContent.classList.add('hidden');
+    errorContent.classList.remove('hidden');
+
+    document.getElementById('errorMessage').textContent = errorMessage;
 }
 
 function resetForm() {
     predictionForm.reset();
     resultSection.classList.add('hidden');
+    resultContent.classList.add('hidden');
+    errorContent.classList.add('hidden');
     bmiInput.value = '';
     bmiCategory.textContent = '';
     document.getElementById('predictionForm').scrollIntoView({ behavior: 'smooth' });

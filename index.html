@@ -279,9 +279,61 @@
                 </button>
             </form>
 
-            <!-- Hasil Prediksi (akan ditampilkan setelah submit) -->
             <div id="resultSection" class="result-section hidden">
-                <div id="resultContent"></div>
+                <div class="loading-state">
+                    <div class="loading-spinner"></div>
+                    <p class="loading-text">Menganalisis data kesehatan Anda...</p>
+                </div>
+
+                <div id="resultContent" class="result-content hidden">
+                    <div class="result-card">
+                        <div class="result-header">
+                            <h3>Hasil Prediksi Risiko Penyakit Jantung</h3>
+                        </div>
+
+                        <div class="risk-meter">
+                            <div class="risk-circle" id="riskCircle">
+                                <div class="risk-percentage" id="riskPercentage">0%</div>
+                                <div class="risk-label" id="riskLabel">-</div>
+                            </div>
+                        </div>
+
+                        <div class="risk-bar-container">
+                            <div class="risk-bar">
+                                <div class="risk-bar-fill" id="riskBarFill"></div>
+                            </div>
+                            <div class="risk-bar-labels">
+                                <span>0%</span>
+                                <span>25%</span>
+                                <span>50%</span>
+                                <span>75%</span>
+                                <span>100%</span>
+                            </div>
+                        </div>
+
+                        <div class="recommendations">
+                            <h4>Rekomendasi Kesehatan:</h4>
+                            <ul class="recommendation-list" id="recommendationList"></ul>
+                        </div>
+
+                        <div class="result-disclaimer">
+                            <p><strong>Disclaimer:</strong> Hasil ini adalah prediksi berbasis AI dan tidak menggantikan
+                                diagnosis medis profesional.
+                                Selalu konsultasikan dengan dokter untuk evaluasi kesehatan yang akurat.</p>
+                        </div>
+
+                        <button onclick="resetForm()" class="btn-reset">Cek Ulang</button>
+                    </div>
+                </div>
+
+                <div id="errorContent" class="error-content hidden">
+                    <div class="error-card">
+                        <div class="error-icon">❌</div>
+                        <h3 class="error-title">Terjadi Kesalahan</h3>
+                        <p class="error-message" id="errorMessage"></p>
+                        <button onclick="resetForm()" class="btn-reset">Coba Lagi</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
