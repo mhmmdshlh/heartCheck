@@ -166,11 +166,13 @@ p.subtitle {
     align-items: center;
     position: relative;
     margin-left: 20px;
+    min-width: 0;
 }
 
 /* Container SVG */
 .monitor-display {
-    width: 500px;
+    width: 100%;
+    max-width: 500px;
     height: 400px;
     position: relative;
 }
@@ -284,29 +286,6 @@ svg {
 
     to {
         opacity: 1;
-    }
-}
-
-/* Responsiveness untuk HP */
-@media (max-width: 768px) {
-    .hero {
-        flex-direction: column-reverse;
-        justify-content: center;
-        padding: 100px 20px;
-        text-align: center;
-    }
-
-    .hero-content {
-        margin-top: 40px;
-    }
-
-    h1 {
-        font-size: 2.5rem;
-    }
-
-    .monitor-display {
-        width: 100%;
-        height: 300px;
     }
 }
 
@@ -821,18 +800,319 @@ svg {
 /* Responsive */
 @media (max-width: 768px) {
     .form-container {
-        padding: 25px;
+        padding: 20px;
     }
 
     .form-container h2 {
-        font-size: 2rem;
+        font-size: 1.75rem;
+    }
+
+    .form-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .form-group-section {
+        padding: 20px;
+        margin-bottom: 25px;
+    }
+
+    .form-group-section h3 {
+        font-size: 1.15rem;
+    }
+
+    .form-group label {
+        font-size: 0.95rem;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="number"],
+    .form-group select {
+        padding: 14px;
+        font-size: 0.9rem;
+    }
+
+    .radio-label {
+        width: 100%;
+        padding: 12px 16px;
+        font-size: 0.9rem;
+    }
+
+    .btn-submit {
+        max-width: 100%;
+        padding: 12px 24px;
+        font-size: 0.95rem;
     }
 
     .form-row {
         grid-template-columns: 1fr;
     }
 
-    .radio-label {
+    .hero {
+        flex-direction: column-reverse;
+        justify-content: flex-start;
+        padding: 80px 5% 40px;
+        text-align: center;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    .hero-visual {
+        margin-left: 0;
+        margin-bottom: 30px;
         width: 100%;
+        max-width: 100%;
+    }
+
+    .hero-content {
+        margin-top: 0;
+        max-width: 100%;
+        padding: 0 5%;
+    }
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 15px;
+        word-wrap: break-word;
+    }
+
+    p.subtitle {
+        font-size: 1.05rem;
+        line-height: 1.7;
+        margin-bottom: 30px;
+        padding: 0 10px;
+    }
+
+    .btn-start {
+        padding: 12px 28px;
+        font-size: 0.95rem;
+    }
+
+    .monitor-display {
+        width: 100%;
+        max-width: 350px;
+        height: 280px;
+        margin: 0 auto;
+    }
+
+    .rating-labels span {
+        font-size: 0.8rem;
+    }
+
+    .rating-labels small {
+        font-size: 0.7rem;
+    }
+
+    .rating-value {
+        font-size: 1rem;
+    }
+
+    .result-card {
+        padding: 15px;
+    }
+
+    .result-header h3 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+
+    .risk-meter {
+        margin: 20px 0;
+    }
+
+    .risk-circle {
+        width: 180px;
+        height: 180px;
+        border-width: 6px;
+    }
+
+    .risk-percentage {
+        font-size: 2.5rem;
+    }
+
+    .risk-label {
+        font-size: 1.1rem;
+    }
+
+    .risk-bar-container {
+        margin: 20px 0;
+    }
+
+    .risk-bar {
+        height: 25px;
+    }
+
+    .risk-bar-labels {
+        font-size: 0.8rem;
+    }
+
+    .recommendations {
+        margin: 20px 0;
+        padding: 18px;
+    }
+
+    .recommendations h4 {
+        font-size: 1.15rem;
+        margin-bottom: 12px;
+    }
+
+    .recommendation-list li {
+        font-size: 0.95rem;
+        padding: 10px 0;
+    }
+
+    .result-disclaimer {
+        font-size: 0.85rem;
+        padding: 15px;
+        margin: 20px 0;
+    }
+
+    .btn-reset {
+        max-width: 100%;
+        padding: 12px 24px;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        padding: 15px;
+    }
+
+    .form-container h2 {
+        font-size: 1.25rem;
+    }
+
+    .form-subtitle {
+        font-size: 0.75rem;
+    }
+
+    .form-group-section {
+        padding: 15px;
+    }
+
+    .form-group-section h3 {
+        font-size: 1.05rem;
+    }
+
+    .form-group label {
+        font-size: 0.8rem;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="number"],
+    .form-group select {
+        padding: 12px;
+        font-size: 0.75rem;
+    }
+
+    .radio-label {
+        padding: 11px 14px;
+        font-size: 0.75rem;
+    }
+
+    .btn-submit {
+        padding: 11px 22px;
+        font-size: 0.9rem;
+    }
+
+    .hero {
+        padding: 60px 3% 30px;
+        min-height: 100vh;
+    }
+
+    .hero-content {
+        padding: 0 7%;
+    }
+
+    h1 {
+        font-size: 1.55rem;
+        line-height: 1.3;
+    }
+
+    p.subtitle {
+        font-size: 0.75rem;
+        line-height: 1.6;
+        padding: 0 5px;
+    }
+
+    .btn-start {
+        padding: 11px 24px;
+        font-size: 0.75rem;
+    }
+
+    .btn-submit {
+        padding: 11px 22px;
+        font-size: 0.75rem;
+    }
+
+    .monitor-display {
+        max-width: 280px;
+        height: 220px;
+    }
+
+    .result-card {
+        padding: 12px;
+    }
+
+    .result-header h3 {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+    }
+
+    .risk-meter {
+        margin: 15px 0;
+    }
+
+    .risk-circle {
+        width: 160px;
+        height: 160px;
+        border-width: 4px;
+    }
+
+    .risk-meter .risk-percentage {
+        font-size: 2rem;
+    }
+
+    .risk-label {
+        font-size: 0.8rem;
+    }
+
+    .risk-bar-container {
+        margin: 15px 0;
+    }
+
+    .risk-bar {
+        height: 20px;
+    }
+
+    .risk-bar-labels {
+        font-size: 0.5rem;
+        margin-top: 8px;
+    }
+
+    .recommendations {
+        margin: 15px 0;
+        padding: 15px;
+    }
+
+    .recommendations h4 {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
+    .recommendation-list li {
+        font-size: 0.75rem;
+        padding: 8px 0;
+    }
+
+    .result-disclaimer {
+        font-size: 0.75rem;
+        padding: 10px;
+        margin: 15px 0;
+    }
+
+    .btn-reset {
+        padding: 11px 22px;
+        font-size: 0.75rem;
     }
 }
