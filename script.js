@@ -93,7 +93,7 @@ predictionForm.addEventListener('submit', function (e) {
     showLoading();
     resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-    fetch('http://mshlh.pythonanywhere.com/predict', {
+    fetch('https://mshlh.pythonanywhere.com/predict', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
