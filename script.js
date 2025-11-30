@@ -52,9 +52,21 @@ weightInput.addEventListener('input', calculateBMI);
 const genHealthSlider = document.getElementById('genHealth');
 const genHealthValue = document.getElementById('genHealthValue');
 
+const statusLabels = [
+    "Sakit",        // Index 0
+    "Sehat",        // Index 1
+    "Sangat Sehat"  // Index 2
+];
+
 genHealthSlider.addEventListener('input', function () {
-    genHealthValue.textContent = this.value;
+    const value = parseInt(genHealthSlider.value);
+    genHealthValue.textContent = statusLabels[value];
+
+    if (value === 0) genHealthValue.style.color = "#f87171";
+    else if (value === 1) genHealthValue.style.color = "#22d3ee";
+    else if (value === 2) genHealthValue.style.color = "#34d399";
 });
+
 
 const predictionForm = document.getElementById('predictionForm');
 const resultSection = document.getElementById('resultSection');
@@ -65,25 +77,23 @@ predictionForm.addEventListener('submit', function (e) {
     e.preventDefault();
 
     const formData = {
-        AgeCategory: document.getElementById('ageCategory').value,
+        Age: document.getElementById('ageCategory').value,
         Sex: document.getElementById('sex').value,
         BMI: parseFloat(document.getElementById('bmi').value),
         GenHealth: parseInt(document.getElementById('genHealth').value),
-        Smoking: document.querySelector('input[name="smoking"]:checked').value,
-        AlcoholDrinking: document.querySelector('input[name="alcoholDrinking"]:checked').value,
-        PhysicalActivity: document.querySelector('input[name="physicalActivity"]:checked').value,
-        Diabetic: document.getElementById('diabetic').value,
-        Asthma: document.querySelector('input[name="asthma"]:checked').value,
-        KidneyDisease: document.querySelector('input[name="kidneyDisease"]:checked').value,
-        SkinCancer: document.querySelector('input[name="skinCancer"]:checked').value,
+        Smoker: document.querySelector('input[name="smoking"]:checked').value,
+        HvyAlcoholConsump: document.querySelector('input[name="alcoholDrinking"]:checked').value,
+        PhysActivity: document.querySelector('input[name="physicalActivity"]:checked').value,
+        Diabetes: document.getElementById('diabetic').value,
         Stroke: document.querySelector('input[name="stroke"]:checked').value,
-        DiffWalking: document.querySelector('input[name="diffWalking"]:checked').value
+        HighChol: document.querySelector('input[name="highChol"]:checked').value,
+        HighBP: document.querySelector('input[name="highBP"]:checked').value
     };
 
     showLoading();
     resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-    fetch('https://mshlh.pythonanywhere.com/predict', {
+    fetch('http://localhost:5000/predict', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -94,6 +104,10 @@ predictionForm.addEventListener('submit', function (e) {
                 displayPredictionResult(data);
             } else {
                 displayError(data.error);
+                console.log(data);
+                console.log(data.error);
+                console.log(data.errorContent);
+                console.log(data.errorMessage);
             }
         })
         .catch(error => {
