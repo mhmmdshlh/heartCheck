@@ -17,7 +17,7 @@ AGE_MAPPING = {
 
 SEX_MAPPING = {'Male': 1, 'Female': 0}
 
-GENHEALTH_MAPPING = {0: 5, 1: 3, 2: 2}
+GENHEALTH_MAPPING = {0: 5, 1: 4, 2: 3, 3: 2, 4: 1}
 
 DIABETIC_MAPPING = {
     '0': 0,
